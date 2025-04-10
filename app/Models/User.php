@@ -3,46 +3,74 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+use Filament\Models\Contracts\FilamentUser;
+use Filament\Panel;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements FilamentUser
 {
-    /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable;
+    protected $keyType = 'string';
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var list<string>
-     */
     protected $fillable = [
         'name',
+        'cpf',
+        'whatsapp',
         'email',
         'password',
+        'commercial_address_street',
+        'commercial_address_number',
+        'commercial_address_neighborhood',
+        'commercial_address_city',
+        'commercial_address_zipcode',
+        'is_admin',
+        'first_login'
     ];
 
-    /**
-     * The attributes that should be hidden for serialization.
-     *
-     * @var list<string>
-     */
-    protected $hidden = [
-        'password',
-        'remember_token',
-    ];
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
+    public function clients()
     {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
+        return $this->hasMany(Client::class);
+    }
+
+    public function serviceTypes()
+    {
+        return $this->hasMany(ServiceType::class);
+    }
+
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class);
+    }
+
+    public function expenseTypes()
+    {
+        return $this->hasMany(ExpenseType::class);
+    }
+
+    public function expenses()
+    {
+        return $this->hasMany(Expense::class);
+    }
+
+    /**
+     * Verifica se o painel é 'admin' ou 'user'
+     */
+    public function canAccessPanel(Panel $panel): bool
+    {
+
+        if ($panel->getId() === 'admin')
+            return $this->is_admin === true;
+
+
+        if ($panel->getId() === 'user')
+            return $this->is_admin === false;
+
+
+        return false;
+    }
+
+    public function needsPasswordChange(): bool
+    {
+        return $this->first_login;
     }
 }
