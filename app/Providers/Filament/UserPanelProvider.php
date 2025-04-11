@@ -8,6 +8,7 @@ use App\Filament\Resources\ExpenseResource;
 use App\Filament\Resources\ExpenseTypeResource;
 use App\Filament\Resources\ServiceTypeResource;
 use App\Filament\User\Pages\ChangePassword;
+use App\Filament\User\Pages\EditProfile;
 use App\Http\Middleware\CheckFirstLogin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -36,10 +37,10 @@ class UserPanelProvider extends PanelProvider
             ->colors([
                 'primary' => Color::Red,
             ])
-            ->profile()
             ->pages([
                 Dashboard::class,
                 ChangePassword::class,
+                EditProfile::class,
             ])
             ->resources([
                 ClientResource::class,
