@@ -7,16 +7,16 @@ use App\Filament\Resources\ClientResource;
 use App\Filament\Resources\ExpenseResource;
 use App\Filament\Resources\ExpenseTypeResource;
 use App\Filament\Resources\ServiceTypeResource;
+use App\Filament\User\Pages\ChangePassword;
 use App\Http\Middleware\CheckFirstLogin;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Pages;
+use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -37,6 +37,10 @@ class UserPanelProvider extends PanelProvider
                 'primary' => Color::Red,
             ])
             ->profile()
+            ->pages([
+                Dashboard::class,
+                ChangePassword::class,
+            ])
             ->resources([
                 ClientResource::class,
                 ServiceTypeResource::class,
