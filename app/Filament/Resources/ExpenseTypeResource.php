@@ -16,7 +16,9 @@ use Filament\Tables\Table;
 class ExpenseTypeResource extends Resource
 {
     protected static ?string $model = ExpenseType::class;
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static bool $shouldRegisterNavigation = false;
+    protected static ?string $label = 'Tipo de Despesa';
+    protected static ?string $pluralLabel = 'Tipos de Despesas';
 
     public static function form(Form $form): Form
     {

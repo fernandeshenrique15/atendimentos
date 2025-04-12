@@ -10,7 +10,7 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables;
+use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
@@ -18,7 +18,8 @@ use Filament\Tables\Table;
 class AppointmentResource extends Resource
 {
     protected static ?string $model = Appointment::class;
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static bool $shouldRegisterNavigation = false;
+    protected static ?string $label = 'Atendimento';
 
     public static function form(Form $form): Form
     {
@@ -120,12 +121,7 @@ class AppointmentResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
+                EditAction::make(),
             ]);
     }
 

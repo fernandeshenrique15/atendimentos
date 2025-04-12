@@ -23,11 +23,8 @@ use Illuminate\Support\Facades\Log;
 class ClientResource extends Resource
 {
     protected static ?string $model = Client::class;
-
+    protected static bool $shouldRegisterNavigation = false;
     protected static ?string $label = 'Cliente';
-    protected static ?string $pluralLabel = 'Clientes';
-
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {

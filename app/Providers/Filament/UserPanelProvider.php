@@ -14,6 +14,7 @@ use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages\Dashboard;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -38,9 +39,38 @@ class UserPanelProvider extends PanelProvider
                 'primary' => Color::Red,
             ])
             ->pages([
-                Dashboard::class,
                 ChangePassword::class,
                 EditProfile::class,
+            ])
+            ->navigationItems([
+                NavigationItem::make('Calendário')
+                    ->url('/user/calendar')
+                    ->icon('heroicon-o-calendar')
+                    ->sort(1),
+                NavigationItem::make('Clientes')
+                    ->url(fn() => ClientResource::getUrl())
+                    ->icon('heroicon-o-users')
+                    ->sort(2),
+                NavigationItem::make('Atendimentos')
+                    ->url(fn() => AppointmentResource::getUrl())
+                    ->icon('heroicon-o-clipboard-document-list')
+                    ->sort(3),
+                NavigationItem::make('Despesas')
+                    ->url(fn() => ExpenseResource::getUrl())
+                    ->icon('heroicon-o-banknotes')
+                    ->sort(4),
+                NavigationItem::make('Tipos de Despesas')
+                    ->url(fn() => ExpenseTypeResource::getUrl())
+                    ->icon('heroicon-o-document-text')
+                    ->sort(5),
+                NavigationItem::make('Tipos de Serviços')
+                    ->url(fn() => ServiceTypeResource::getUrl())
+                    ->icon('heroicon-o-wrench-screwdriver')
+                    ->sort(6),
+                NavigationItem::make('Editar Perfil')
+                    ->url(fn() => EditProfile::getUrl())
+                    ->icon('heroicon-o-user')
+                    ->sort(7),
             ])
             ->resources([
                 ClientResource::class,

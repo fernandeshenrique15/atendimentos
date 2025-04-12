@@ -18,7 +18,8 @@ use Filament\Tables\Table;
 class ExpenseResource extends Resource
 {
     protected static ?string $model = Expense::class;
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static bool $shouldRegisterNavigation = false;
+    protected static ?string $label = 'Despesa';
 
     public static function form(Form $form): Form
     {
