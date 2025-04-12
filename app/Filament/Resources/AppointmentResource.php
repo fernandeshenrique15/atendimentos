@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\AppointmentResource\Pages;
 use App\Models\Appointment;
-use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -109,6 +108,9 @@ class AppointmentResource extends Resource
                     ->sortable(),
                 TextColumn::make('is_recurring')
                     ->label('Recorrente')
+                    ->badge()
+                    ->formatStateUsing(fn (string $state): string => $state === '1' ? 'Sim' : 'Não')
+                    ->color(fn (string $state): string => $state === '1' ? 'success' : 'danger')
                     ->sortable(),
                 TextColumn::make('recurrence_count')
                     ->label('Recorrência')
