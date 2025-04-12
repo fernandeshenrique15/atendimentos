@@ -79,12 +79,12 @@
         }
 
         dialog a.create {
-            background-color: #2563eb;
+            background-color: rgb(248 113 113);
             color: #fff;
         }
 
         dialog a.create:hover {
-            background-color: #1d4ed8;
+            background-color: rgb(248 113 113);
         }
     </style>
 
