@@ -13,6 +13,7 @@ class EditProfile extends Page
     protected static string $view = 'filament.user.pages.edit-profile';
     protected static bool $shouldRegisterNavigation = true;
     protected static ?string $title = 'Editar Perfil';
+    protected static ?string $navigationGroup = 'Usuário';
     public ?array $data = [];
 
     public function mount(): void
