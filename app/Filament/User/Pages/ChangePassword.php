@@ -48,7 +48,7 @@ class ChangePassword extends Page
             ->success()
             ->send();
 
-        $this->redirect(route('filament.user.pages.dashboard')); // Ou outra página padrão
+        $this->redirect(Finances::getUrl());
     }
 
     protected function getResource(): string
