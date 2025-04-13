@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Filament\User\Pages\Finances;
 use App\Filament\Resources\AppointmentResource;
 use App\Filament\Resources\ClientResource;
 use App\Filament\Resources\ExpenseResource;
@@ -40,35 +41,36 @@ class UserPanelProvider extends PanelProvider
             ->pages([
                 ChangePassword::class,
                 EditProfile::class,
+                Finances::class,
             ])
             ->navigationItems([
                 NavigationItem::make('Calendário')
                     ->url('/user/calendar')
                     ->icon('heroicon-o-calendar')
                     ->sort(1),
+                NavigationItem::make('Finanças')
+                    ->url(fn () => Finances::getUrl())
+                    ->icon('heroicon-o-banknotes')
+                    ->sort(2),
                 NavigationItem::make('Clientes')
                     ->url(fn() => ClientResource::getUrl())
                     ->icon('heroicon-o-users')
-                    ->sort(2),
+                    ->sort(3),
                 NavigationItem::make('Atendimentos')
                     ->url(fn() => AppointmentResource::getUrl())
                     ->icon('heroicon-o-clipboard-document-list')
-                    ->sort(3),
+                    ->sort(4),
                 NavigationItem::make('Despesas')
                     ->url(fn() => ExpenseResource::getUrl())
                     ->icon('heroicon-o-banknotes')
-                    ->sort(4),
+                    ->sort(5),
                 NavigationItem::make('Tipos de Despesas')
                     ->url(fn() => ExpenseTypeResource::getUrl())
                     ->icon('heroicon-o-document-text')
-                    ->sort(5),
+                    ->sort(6),
                 NavigationItem::make('Tipos de Serviços')
                     ->url(fn() => ServiceTypeResource::getUrl())
                     ->icon('heroicon-o-wrench-screwdriver')
-                    ->sort(6),
-                NavigationItem::make('Editar Perfil')
-                    ->url(fn() => EditProfile::getUrl())
-                    ->icon('heroicon-o-user')
                     ->sort(7),
             ])
             ->resources([

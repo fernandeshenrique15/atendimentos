@@ -59,6 +59,7 @@
 <body>
     <nav class="navbar">
         <ul>
+            <li><a href="{{ url('/user/finances') }}" class="{{ request()->is('user/finances') ? 'active' : '' }}">Finanças</a></li>
             <li><a href="{{ url('/user/calendar') }}" class="{{ request()->is('user/calendar') ? 'active' : '' }}">Agenda</a></li>
             <li><a href="{{ url('/user/clients') }}" class="{{ request()->is('user/clients*') ? 'active' : '' }}">Clientes</a></li>
             <li><a href="{{ url('/user/appointments') }}" class="{{ request()->is('user/appointments*') ? 'active' : '' }}">Atendimentos</a></li>
