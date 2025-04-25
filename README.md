@@ -27,11 +27,15 @@ Este projeto é uma aplicação WEB para gestão de atendimentos de consultório
 - Livewire
 - Postgres
 
+## ✅ Requisitos
+- [Docker](https://www.docker.com/)
+- (Opcional) [Git](https://git-scm.com/) para clonar o repositório
+
 ## Instruções de Instalação
 
 1. **Clonar o repositório**
    ```bash
-   git clone git@github.com:fernandeshenrique15/atendimentos.git
+   git clone https://github.com/fernandeshenrique15/atendimentos.git
    ```
 
 2. **Navegar para a pasta do projeto**
@@ -46,17 +50,25 @@ Este projeto é uma aplicação WEB para gestão de atendimentos de consultório
 
 4. **Instalar dependências**
    ```bash
-   composer install
+    docker run --rm \
+      -v $(pwd):/app \
+      -w /app \
+      php:8.3-cli bash -c "\
+    apt-get update && \
+    apt-get install -y libzip-dev libicu-dev unzip && \
+    docker-php-ext-install zip intl && \
+    curl -sS https://getcomposer.org/installer | php && \
+    php composer.phar install"
    ```
 
 5. **Iniciar o Docker com Laravel Sail**
    ```bash
-   sail up -d
+   sudo ./vendor/bin/sail up -d
    ```
-
+   
 6. **Executar as migrações do banco de dados**
    ```bash
-   sail artisan migrate
+   ./vendor/bin/sail artisan migrate
    ```
 
 ## Acesso à aplicação
